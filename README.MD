@@ -28,6 +28,7 @@ This script loads network, then uses it to make predictions and save it to `pred
     df=pd.read_csv('../datasets/{your_new_data.csv}')
 
 **Train and test losses during training**
+
     Train loss: 0.10 | Test loss: 0.14
 
 **Metrics using validational dataset(pregnancies_val_data.csv):**
