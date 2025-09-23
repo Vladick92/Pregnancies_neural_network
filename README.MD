@@ -15,7 +15,7 @@ This neural network predicts if pregnant woman have high risk of pregnancy based
 
     python train.py
 
-Dataset looks good and dont require a lot of preproccesing. This script firstly removes all null values, and applyies categorical encoding to target column. Splits dataset into training, test and validation, then trains neural network. Also dataset isnt huge (approx 1200 rows), so mini-batch gradient descent were used. After training weights of neural network saves with `network_weights.pth` name.I you want train network on your data, just edit line 8:
+Dataset looks good and dont require a lot of preproccesing. This script firstly removes all null values, and applyies categorical encoding to target column. Splits dataset into training, test and validation, then trains neural network. Also dataset isnt huge (approx 1200 rows), so mini-batch gradient descent were used. After training weights of neural network saves with `network_weights.pth` name. If you want train network on your data, just edit line 8:
 
     df=pd.read_csv('../datasets/{new_dataset.csv}')
 
