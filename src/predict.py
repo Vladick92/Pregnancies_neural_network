@@ -1,7 +1,7 @@
 import torch
 import pandas as pd
-import torch.nn as nn
-from sklearn.metrics import recall_score,log_loss,f1_score
+from utils import *
+from model_layers import *
 
 # Loading data for making predictions
 df=pd.read_csv('../datasets/pregnancies_val_data.csv')
@@ -10,28 +10,21 @@ df=pd.read_csv('../datasets/pregnancies_val_data.csv')
 df=df.dropna(axis=1)
 
 # Turning dataframe values into tensors
-x_values=df.drop(df.columns[-1],axis=1)
-y_values=df.iloc[:,-1]
-x_ten=torch.from_numpy(x_values.to_numpy()).type(torch.float32)
-y_ten=torch.from_numpy(y_values.to_numpy()).type(torch.float32)
+if 'Risk Level' in df.columns:
+    x_ten=torch.from_numpy(df.drop('Risk Level',axis=1).to_numpy()).type(torch.float32)
+    y_ten=torch.from_numpy(df['Risk Level'].to_numpy()).type(torch.float32).unsqueeze(1)
+else:
+    x_ten=torch.from_numpy(df.to_numpy()).type(torch.float32)
 
 # Loading model`s weights
-model=nn.Sequential(
-    nn.Linear(11,8),
-    nn.ReLU(),
-    nn.Linear(8,1)
-)
+model=make_model()
 model.load_state_dict(torch.load('./network_weights.pth',weights_only=True))
 
-# Getting predictions and metrics
-model.eval()
-with torch.inference_mode():
-    logits=model(x_ten)
-    sigms=torch.sigmoid(logits)
-    preds=(sigms>=0.5).long()
-    print(f'Recall score: {recall_score(y_values,preds.detach().numpy()):.3f}')
-    print(f'F1 score: {f1_score(y_values,preds.detach().numpy()):.3f}')
-    print(f'Log loss: {log_loss(y_values,sigms.numpy()):.3f}')
+# Getting predictions
+if 'Risk Level' in df.columns:
+    preds=predict(model,x_ten,y_ten)
+else:
+    preds=predict(model,x_ten)
 
 # Saving predictions
 preds=pd.DataFrame(preds.numpy(),columns=['Risk Level'])

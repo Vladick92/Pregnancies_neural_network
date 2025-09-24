@@ -1,4 +1,4 @@
-Age,Systolic BP,Diastolic,BS,Body Temp,BMI,Previous Complications,Preexisting Diabetes,Gestational Diabetes,Mental Health,Heart Rate,Risk Level
+ Age,Systolic BP,Diastolic,BS,Body Temp,BMI,Previous Complications,Preexisting Diabetes,Gestational Diabetes,Mental Health,Heart Rate,Risk Level
 22,110.0,70.0,4.3,98,20.0,0.0,0.0,0,0,76.0,0
 19,120.0,90.0,3.8,98,21.0,0.0,0.0,0,0,70.0,0
 23,130.0,80.0,5.0,98,23.0,0.0,0.0,0,0,74.0,0

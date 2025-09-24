@@ -15,7 +15,7 @@ This neural network predicts if pregnant woman have high risk of pregnancy based
 
     python train.py
 
-Dataset looks good and dont require a lot of preproccesing. This script firstly removes all null values, and applyies categorical encoding to target column. Splits dataset into training, test and validation, then trains neural network. Also dataset isnt huge (approx 1200 rows), so mini-batch gradient descent were used. After training weights of neural network saves with `network_weights.pth` name. If you want train network on your data, just edit line 8:
+Dataset looks good and dont require a lot of preproccesing. This script firstly removes all null values, and applyies categorical encoding to target column. Splits dataset into training, test and validation, then trains neural network. Mini-batch gradient descent were used for training. After training weights of neural network saves with `network_weights.pth` name. If you want train network on your data, just edit line 8:
 
     df=pd.read_csv('../datasets/{new_dataset.csv}')
 
@@ -23,7 +23,7 @@ Dataset looks good and dont require a lot of preproccesing. This script firstly 
 
     python predict.py
 
-This script loads network, then uses it to make predictions and save it to `predictions.csv` in 'src' folder. There is only one step for preprocessing, its dropping null values. If you want to make predictions with other data edit line 7: 
+This script loads network, then uses it to make predictions and save it to `predictions.csv` in 'src' folder. There is only one step for preprocessing, its dropping null values. If target column present in dataframe, metrics of prediction will be printed out in console .If you want to make predictions with other data edit line 7 e.g., make predictions with `pregnancies_test_data.csv` dataset: 
 
     df=pd.read_csv('../datasets/{your_new_data.csv}')
 
@@ -31,7 +31,7 @@ This script loads network, then uses it to make predictions and save it to `pred
 
     Train loss: 0.10 | Test loss: 0.14
 
-**Metrics using validational dataset(pregnancies_val_data.csv):**
+**Metrics using validational dataset (pregnancies_val_data.csv):**
 
     recall score: 0.949
     f1 score: 0.974

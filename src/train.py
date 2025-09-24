@@ -1,9 +1,9 @@
 import pandas as pd
-import torch.nn as nn
 import torch
 from columns_for_preprocessing import *
 from torch.utils.data import TensorDataset,DataLoader
 from utils import *
+from model_layers import *
 
 df=pd.read_csv('../datasets/Dataset - Updated.csv')
 
@@ -36,18 +36,13 @@ train_loader=DataLoader(train_dataset,10,True)
 test_loader=DataLoader(test_dataset,5,True)
 
 # Using nn.Sequential, for less code instead of nn.Module
-torch.manual_seed(42)
-model=nn.Sequential(
-    nn.Linear(11,8),
-    nn.ReLU(),
-    nn.Linear(8,1)
-)
+model=make_model()
 
 # Function for training neural network, that returns trained network
 trained=train_model(model,train_loader,test_loader)
 
-# Function that prints metrics
-evaluate_model(trained,x_val_ten,y_val_ten)
+# Function for getting predictions and printing metrics if possible
+preds=predict(trained,x_val_ten,y_val_ten)
 
 # Saving network
 torch.save(trained.state_dict(),'network_weights.pth')
