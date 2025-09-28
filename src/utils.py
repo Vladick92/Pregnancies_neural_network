@@ -49,19 +49,6 @@ def train_model(model_p,train_loader,test_loader):
     print(f'Train loss: {train_losses[-1]:.2f} | Test loss: {test_losses[-1]:.2f}')
     return model
 
-# def evaluate_model(model,x_val,y_val):
-#     with torch.inference_mode():
-#         logits=model(x_val)
-#         sigms=torch.sigmoid(logits)
-#         preds=(sigms>=0.5).long()    
-#     print('Metrics on validation dataset')
-#     print(f'Recall score: {recall_score(y_val.numpy(),preds.detach().numpy()):.3f}')
-#     print(f'F1 score: {f1_score(y_val.numpy(),preds.detach().numpy()):.3f}')
-#     print(f'Log loss: {log_loss(y_val.numpy(),sigms.numpy()):.3f}')
-#     print(f'Confusion matrix: {'\n'}{confusion_matrix(y_val.numpy(),preds.detach().numpy())}')
-
-
-
 def predict(model,x_val,y_val=None):
     with torch.inference_mode():
         logits=model(x_val)
